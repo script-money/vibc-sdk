@@ -1,6 +1,6 @@
 {
   "name": "vibc-sdk",
-  "version": "0.0.2-alpha3",
+  "version": "0.0.3-alpha1",
   "description": "A community building SDK help application devs to scaffold and test IBC enabled contracts easily",
   "type": "module",
   "module": "dist/index.js",

@@ -27,7 +27,7 @@ export async function createNewProject(project: string | undefined) {
     }
 
     const templateUrl = 'https://github.com/open-ibc/ibc-app-solidity-template'
-    const cloneCommand = `git clone --depth 1 ${templateUrl} ${projectName}`
+    const cloneCommand = `git clone --depth 1 --recursive --shallow-submodules ${templateUrl} ${projectName}`
     console.log(chalk.green(`Creating new project: ${projectName}`))
 
     await execPromise(cloneCommand)
@@ -37,20 +37,20 @@ export async function createNewProject(project: string | undefined) {
 
     await execPromise('rm -rf .git')
     await execPromise('git init')
+    await execPromise('rm -f .gitmodules')
 
     console.log(chalk.green('Installing dependencies...'))
     // TODO:
-    // 1. not install just
-    // 2. check network
-    // 3. show install progress
-    await execPromise('just install')
+    // 1. check network
+    // 2. show install progress
+    await execPromise('npm install')
     await execPromise('cp .env.example .env')
+    await execPromise('echo "lib/" >> .gitignore')
 
     console.log(chalk.green('New project created successfully!'))
     console.log('To start the project, run:')
     console.log(chalk.yellow(`cd ${projectName}`))
-    console.log(chalk.yellow('then fill PRIVATE_KEY_1 in .env file'))
-    console.log(chalk.yellow('run `just send-packet base` to send a packet from base to optimism'))
+    console.log(chalk.yellow('then fill missing fields in .env file'))
     console.log(chalk.yellow('more details in README.md'))
   } catch (error) {
     console.error(chalk.red('Error creating new project:'), error)
