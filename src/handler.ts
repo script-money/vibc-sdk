@@ -28,7 +28,7 @@ export async function createNewProject(project: string | undefined) {
 
     const templateUrl = 'https://github.com/open-ibc/ibc-app-solidity-template'
     const cloneCommand = `git clone --depth 1 --recursive --shallow-submodules ${templateUrl} ${projectName}`
-    console.log(chalk.green(`Creating new project: ${projectName}`))
+    console.log(chalk.green(`Creating new project: ${projectName}, need minutes to download dependencies...`))
 
     await execPromise(cloneCommand)
     console.log(chalk.green('Cloned template successfully'))
