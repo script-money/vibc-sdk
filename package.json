@@ -1,6 +1,6 @@
 {
   "name": "vibc-sdk",
-  "version": "0.0.3-alpha1",
+  "version": "0.1.0",
   "description": "A community building SDK help application devs to scaffold and test IBC enabled contracts easily",
   "type": "module",
   "module": "dist/index.js",
@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "build": "bun build index.ts --outdir ./dist --target node",
-    "prepublishOnly": "bun run build"
+    "postbuild": "sed -i.bak '1s|.*|#!/usr/bin/env node|' ./dist/index.js && rm ./dist/index.js.bak",
+    "prepublishOnly": "bun run build && bun run postbuild"
   },
   "homepage": "https://github.com/script-money/vibc-sdk#readme",
   "repository": {
