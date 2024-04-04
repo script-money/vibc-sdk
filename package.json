@@ -13,8 +13,7 @@
   ],
   "scripts": {
     "build": "bun build index.ts --outdir ./dist --target node",
-    "postbuild": "sed -i.bak '1s|.*|#!/usr/bin/env node|' ./dist/index.js && rm ./dist/index.js.bak",
-    "prepublishOnly": "bun run build && bun run postbuild"
+    "prepublishOnly": "bun run build"
   },
   "homepage": "https://github.com/script-money/vibc-sdk#readme",
   "repository": {
